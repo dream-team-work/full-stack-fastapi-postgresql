@@ -1,6 +1,13 @@
 ## PARA RODAR O TESTE
 
 na raiz do projeto com o docker instalado em sua maquina rode o comando:
+
+Liberando o network public:
+````
+docker network create traefik-public
+````
+
+Subindo a aplicação.
 ````
 docker-compose up 
 ````
@@ -11,7 +18,7 @@ http://localhost:8000/docs#/
 ````
 
 
-## Crie o usuario no endpoint:
+## Crie o usuario do tipo não admin pelo endpoint:
 
 ````
 curl -X 'POST' \
@@ -19,13 +26,17 @@ curl -X 'POST' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-  "email": "administrador@tivit.com",
+  "email": "user@tivit.com",
   "password": "123Mudar",
-  "full_name": "administrador"
+  "full_name": "user"
 }'
 ````
 
-## LIBERANDO O ACESSO AS REQUESTS ( AUTHORIZE )
+## Mudando o usuário para para o perfil admin.
+Acesse a base de dados e dentro dela deixe como verdadeiro a coluna do banco de nome is_superuser para
+que o usuario criado na request vire do tipo admim.
+
+## LIBERANDO O ACESSO AS REQUESTS ( AUTHORIZE ) APENAS USUÁRIOS DO TIPO ADMIN PODEM!
 
 Com o usurio e senha ja criados, va ate o cadeado do swagger da aplicacao do lado direito superior e preencha os campos 
 usuario e senha, caso tudo de ceto algo como os dados abaixo serao apresentados:
