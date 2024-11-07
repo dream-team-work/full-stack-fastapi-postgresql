@@ -1,13 +1,21 @@
-#! /usr/bin/env bash
+#!/bin/bash
 
-set -e
-set -x
+# Depuração: Verificar se o ambiente virtual foi criado corretamente
+echo "Ativando o ambiente virtual..."
 
-# Let the DB start
-python app/backend_pre_start.py
+# Verificar se o ambiente virtual existe
+if [ ! -d "/app/.venv" ]; then
+    echo "Erro: ambiente virtual não encontrado."
+    exit 1
+fi
 
-# Run migrations
-alembic upgrade head
+# Ativar o ambiente virtual
+source /app/.venv/bin/activate
 
-# Create initial data in DB
-python app/initial_data.py
+# Verificar se o SQLAlchemy está instalado no ambiente virtual
+echo "Verificando se o SQLAlchemy está instalado..."
+/app/.venv/bin/pip show sqlalchemy
+
+# Executar o script de pré-inicialização
+echo "Executando o script backend_pre_start.py..."
+python /app/app/backend_pre_start.py
