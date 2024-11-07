@@ -1,0 +1,22 @@
+version: "3.8"  # Certifique-se de que está usando a mesma versão do compose
+
+services:
+  backend:
+    restart: "no"
+    ports:
+      - "8000:8000"
+    build:
+      context: ./backend
+    command:
+      - fastapi
+      - run
+      - --reload
+      - "app/main.py"
+    volumes:
+      - ./backend:/app
+      - ./backend/pyproject.toml:/app/pyproject.toml
+    environment:
+      SMTP_HOST: "mailcatcher"
+      SMTP_PORT: "1025"
+      SMTP_TLS: "false"
+      EMAILS_FROM_EMAIL: "noreply@example.com"
