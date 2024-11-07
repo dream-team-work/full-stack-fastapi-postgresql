@@ -13,7 +13,14 @@ COPY requirements.txt /app/
 # Copiar os scripts para /app/scripts
 COPY scripts /app/scripts
 
-# Criar um ambiente virtual e instalar dependências
+# Criar o ambiente virtual
+RUN python -m venv /opt/venv
+
+# Ativar o ambiente virtual
+ENV VIRTUAL_ENV=/opt/venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+# Instalar as dependências dentro do ambiente virtual
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Instalar o Uvicorn (servidor ASGI recomendado para FastAPI)
