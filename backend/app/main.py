@@ -5,6 +5,8 @@ from starlette.middleware.cors import CORSMiddleware
 
 from app.api.main import api_router
 from app.core.config import settings
+from app.core.db import create_db_and_tables  
+
 
 
 def custom_generate_unique_id(route: APIRoute) -> str:
@@ -19,6 +21,9 @@ app = FastAPI(
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
     generate_unique_id_function=custom_generate_unique_id,
 )
+
+# Criando as tabelas automaticamente ao iniciar o servidor
+create_db_and_tables() 
 
 # Set all CORS enabled origins
 if settings.all_cors_origins:
