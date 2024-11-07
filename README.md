@@ -25,13 +25,20 @@ curl -X 'POST' \
 }'
 ````
 
-## Ou crie os usuarios rodando manualmente usando os SQL Abaixo:
-````
-INSERT INTO public."user" (id, email, is_active, is_superuser, hashed_password) VALUES
-    ('f9a7bfa6-0b58-4a72-9a2e-e4ecce7b7b6a', 'admin@tivit.com', TRUE, TRUE, '$2b$12$0Qt/56.z1HdbGV7O0dzZneI3rVsn0q.V8ny5.q0VduzD5FGh9Tz7u'),
-    ('bb1f3f9a-11b8-40e3-8adf-51dffaf81d1d', 'user@tivit.com', TRUE, FALSE, '$2b$12$kCm0s6F5kD54l1EJl55d3uEZcNdkjwUnTY9mF5r8Yh.c.WP0ll3AW');
-````
+## LIBERANDO O ACESSO AS REQUESTS ( AUTHORIZE )
 
+Com o usurio e senha ja criados, va ate o cadeado do swagger da aplicacao do lado direito superior e preencha os campos 
+usuario e senha, caso tudo de ceto algo como os dados abaixo serao apresentados:
 
+OAuth2PasswordBearer (OAuth2, password)
+Authorized
+Token URL: /api/v1/login/access-token
 
+Flow: password
 
+username: user@example.com
+password: ******
+Client credentials location: basic
+client_secret: ******
+
+( AGORA VOCE TEM ACESSO A TODAS AS REQUISICOES DA APLICACAO QUE ANTES NAO ESTAVAM PERMITIDAS )
